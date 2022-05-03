@@ -39,7 +39,7 @@ func Question(title, text string, defaultCancel bool) (bool, error) {
 		dflt = "--default-cancel"
 	}
 
-	err = exec.Command(cmd, "--question", "--title", title, "--text", text, dflt).Run()
+	err = exec.Command(cmd, "--question", "--title", title, "--text", text, "--width", "200", dflt).Run()
 	if err != nil {
 		if exitError, ok := err.(*exec.ExitError); ok {
 			ws := exitError.Sys().(syscall.WaitStatus)
@@ -57,7 +57,7 @@ func cmdDialog(title, text, level string) (bool, error) {
 		return false, err
 	}
 
-	err = exec.Command(cmd, "--"+level, "--title", title, "--text", text).Run()
+	err = exec.Command(cmd, "--"+level, "--title", title, "--text", text, "--width", "200").Run()
 	if err != nil {
 		if exitError, ok := err.(*exec.ExitError); ok {
 			ws := exitError.Sys().(syscall.WaitStatus)
